@@ -1,0 +1,4672 @@
+/*
+Theme Name: Oscar & Julienne Wedding
+Theme URI: https://example.com/
+Author: ChatGPT
+Description: Custom wedding invitation theme for Oscar & Julienne with scroll animations and image placeholders.
+Version: 1.1
+License: GNU General Public License v2 or later
+Text Domain: oscarjuliennewedding
+*/
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Cormorant Garamond", "Times New Roman", serif;
+    background-color: #f7f4ee;
+    background-image: radial-gradient(circle at top left, rgba(0,0,0,0.02) 0, transparent 55%),
+                      radial-gradient(circle at bottom right, rgba(0,0,0,0.02) 0, transparent 55%);
+    color: #3c3c3c;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.site-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ==============================
+   OPENING SCREEN — DEBUT EDITORIAL
+============================== */
+#opening-screen {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 9999;
+    background: #000;
+    overflow: hidden;
+}
+
+/* LOCK PAGE COMPLETELY DURING OPENING */
+body.opening-active {
+    overflow: hidden;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    touch-action: none;
+    overscroll-behavior: none;
+}
+
+/* PREVENT ANY SIDE SCROLL */
+html,
+body {
+    overflow-x: hidden;
+}
+
+/* OPENING SCREEN SAFETY */
+#opening-screen {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 9999;
+    background: #000;
+    overflow: hidden;
+    touch-action: none;
+    overscroll-behavior: none;
+}
+
+.opening-stage {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+/* ==============================
+   VISUAL STAGE
+============================== */
+.opening-stage {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr 0.85fr;
+    gap: 0;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.opening-panel {
+    position: relative;
+    overflow: hidden;
+}
+
+.opening-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.06);
+    will-change: transform, filter;
+}
+
+/* subtle different crops */
+.opening-panel-left img {
+    object-position: center 35%;
+    animation: debutPanelLeft 16s ease-in-out infinite alternate;
+}
+
+.opening-panel-center img {
+    object-position: center center;
+    animation: debutPanelCenter 18s ease-in-out infinite alternate;
+}
+
+.opening-panel-right img {
+    object-position: center 35%;
+    animation: debutPanelRight 17s ease-in-out infinite alternate;
+}
+
+/* dark side panels for depth */
+.opening-panel-left::after,
+.opening-panel-right::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.26);
+}
+
+.opening-panel-center::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to bottom,
+            rgba(0,0,0,0.08),
+            rgba(0,0,0,0.18) 60%,
+            rgba(0,0,0,0.22));
+}
+
+/* elegant vertical separators */
+.opening-panel-left::before,
+.opening-panel-right::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(217,183,122,0.40),
+        transparent
+    );
+    z-index: 2;
+}
+
+.opening-panel-left::before {
+    right: 0;
+}
+
+.opening-panel-right::before {
+    left: 0;
+}
+
+/* ==============================
+   OVERLAY
+============================== */
+.opening-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background:
+        radial-gradient(circle at center, rgba(255,215,160,0.05), transparent 30%),
+        linear-gradient(
+            to bottom,
+            rgba(8,8,8,0.40),
+            rgba(8,8,8,0.46) 35%,
+            rgba(8,8,8,0.58) 100%
+        );
+}
+
+/* subtle moving golden glow */
+.opening-overlay::before {
+    content: "";
+    position: absolute;
+    inset: -10%;
+    background:
+        radial-gradient(circle at 50% 48%, rgba(217,183,122,0.13), transparent 22%),
+        radial-gradient(circle at 35% 28%, rgba(217,183,122,0.08), transparent 18%),
+        radial-gradient(circle at 70% 70%, rgba(217,183,122,0.08), transparent 18%);
+    mix-blend-mode: screen;
+    animation: debutGlowFloat 10s ease-in-out infinite alternate;
+}
+
+/* ==============================
+   CENTER CONTENT
+============================== */
+.opening-content {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.opening-editorial {
+    width: 100%;
+    max-width: 760px;
+    text-align: center;
+    color: #F9F6F0;
+}
+
+.opening-topline {
+    width: 120px;
+    height: 1px;
+    margin: 0 auto 28px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(217,183,122,0.95),
+        transparent
+    );
+    box-shadow: 0 0 20px rgba(217,183,122,0.22);
+    animation: debutLineGlow 3.8s ease-in-out infinite;
+}
+
+.opening-kicker {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: rgba(249,246,240,0.76);
+    margin-bottom: 20px;
+}
+
+.opening-title {
+    margin: 0;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(54px, 9vw, 112px);
+    line-height: 0.94;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #F9F6F0;
+    text-shadow: 0 10px 34px rgba(0,0,0,0.22);
+}
+
+.opening-subtitle {
+    margin-top: 22px;
+    margin-bottom: 34px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.44em;
+    text-transform: uppercase;
+    color: #D9B77A;
+}
+
+/* ==============================
+   OPEN INVITATION BUTTON
+============================== */
+#open-invitation-btn {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+
+    padding: 15px 34px;
+    min-width: 250px;
+
+    border-radius: 999px;
+    border: 1px solid rgba(217,183,122,0.78);
+    background: rgba(255,255,255,0.06);
+    color: #F3DFB0;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.18),
+        0 0 0 1px rgba(255,255,255,0.04) inset;
+
+    transition:
+        transform 0.35s ease,
+        background 0.35s ease,
+        color 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+
+    animation: debutButtonFloat 2.8s ease-in-out infinite;
+}
+
+#open-invitation-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255,255,255,0.06) 35%,
+        rgba(255,255,255,0.18) 50%,
+        rgba(255,255,255,0.06) 65%,
+        transparent 100%
+    );
+    transform: translateX(-120%);
+    animation: debutButtonShine 3.6s ease-in-out infinite;
+}
+
+#open-invitation-btn:hover,
+#open-invitation-btn:active {
+    background: linear-gradient(135deg, rgba(217,183,122,0.92), rgba(194,154,91,0.94));
+    color: #ffffff;
+    border-color: rgba(217,183,122,1);
+    box-shadow:
+        0 0 26px rgba(217,183,122,0.34),
+        0 12px 34px rgba(0,0,0,0.20);
+    transform: translateY(-1px);
+}
+
+#open-invitation-btn:hover::before,
+#open-invitation-btn:active::before {
+    animation-play-state: paused;
+}
+
+/* ==============================
+   MOBILE
+============================== */
+@media (max-width: 768px) {
+    .opening-stage {
+        grid-template-columns: 1fr;
+    }
+
+    .opening-panel-left,
+    .opening-panel-right {
+        display: none;
+    }
+
+    .opening-panel-center img {
+        object-position: center center;
+        animation-duration: 14s;
+    }
+
+    .opening-editorial {
+        max-width: 360px;
+    }
+
+    .opening-topline {
+        width: 90px;
+        margin-bottom: 22px;
+    }
+
+    .opening-kicker {
+        font-size: 10px;
+        letter-spacing: 0.26em;
+        margin-bottom: 16px;
+    }
+
+    .opening-title {
+        font-size: clamp(44px, 15vw, 68px);
+        line-height: 0.96;
+        letter-spacing: 0.08em;
+    }
+
+    .opening-subtitle {
+        font-size: 12px;
+        letter-spacing: 0.30em;
+        margin-top: 18px;
+        margin-bottom: 28px;
+    }
+
+    #open-invitation-btn {
+        min-width: 220px;
+        font-size: 12px;
+        padding: 15px 28px;
+        letter-spacing: 0.16em;
+    }
+
+    .opening-overlay {
+        background:
+            radial-gradient(circle at center, rgba(255,215,160,0.04), transparent 30%),
+            linear-gradient(
+                to bottom,
+                rgba(8,8,8,0.42),
+                rgba(8,8,8,0.50) 40%,
+                rgba(8,8,8,0.62) 100%
+            );
+    }
+}
+
+/* ==============================
+   SMALL PHONES
+============================== */
+@media (max-width: 420px) {
+    .opening-content {
+        padding: 20px;
+    }
+
+    .opening-title {
+        font-size: 46px;
+    }
+
+    #open-invitation-btn {
+        min-width: 210px;
+    }
+}
+
+/* ==============================
+   MUSIC TOGGLE / OPENING STATE
+============================== */
+#music-toggle {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+body.opening-active .music-toggle,
+body.opening-active #music-toggle {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* skip opening */
+.skip-opening #opening-screen {
+    display: none !important;
+}
+
+/* ==============================
+   ANIMATIONS
+============================== */
+@keyframes debutPanelLeft {
+    from { transform: scale(1.06) translate3d(0, 0, 0); }
+    to   { transform: scale(1.12) translate3d(-10px, -8px, 0); }
+}
+
+@keyframes debutPanelCenter {
+    from { transform: scale(1.04) translate3d(0, 0, 0); }
+    to   { transform: scale(1.10) translate3d(0, -10px, 0); }
+}
+
+@keyframes debutPanelRight {
+    from { transform: scale(1.06) translate3d(0, 0, 0); }
+    to   { transform: scale(1.12) translate3d(10px, -6px, 0); }
+}
+
+@keyframes debutGlowFloat {
+    0%   { transform: translate3d(0,0,0) scale(1); }
+    100% { transform: translate3d(0,-10px,0) scale(1.03); }
+}
+
+@keyframes debutLineGlow {
+    0%, 100% { opacity: 0.7; box-shadow: 0 0 12px rgba(217,183,122,0.18); }
+    50%      { opacity: 1;   box-shadow: 0 0 22px rgba(217,183,122,0.32); }
+}
+
+@keyframes debutButtonFloat {
+    0%, 100% {
+        transform: translateY(0);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    }
+    50% {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 36px rgba(0,0,0,0.22);
+    }
+}
+
+@keyframes debutButtonShine {
+    0%   { transform: translateX(-120%); }
+    45%  { transform: translateX(-120%); }
+    60%  { transform: translateX(120%); }
+    100% { transform: translateX(120%); }
+}
+
+/* LOCK PAGE COMPLETELY DURING OPENING */
+body.opening-active {
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* PREVENT ANY SIDE SCROLL */
+body {
+    overflow-x: hidden;
+}
+
+.opening-stage {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* DESKTOP NAVIGATION (HEADER) SECTION */
+
+.top-nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto;
+    align-items: center;
+    padding: 20px 40px;
+    font-family: "Montserrat", Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    column-gap: 20px;
+}
+
+.top-nav .nav-left {
+    justify-self: flex-start;
+}
+
+.top-nav .nav-center {
+    justify-self: center;
+}
+
+.top-nav .nav-right {
+    justify-self: flex-end;
+}
+
+.primary-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.primary-menu li {
+    position: relative;
+}
+
+.primary-menu li ul {
+    position: absolute;
+    top: 140%;
+    left: 0;
+    background: #f7f4ee;
+    border: 1px solid #ddd0b8;
+    padding: 10px 0;
+    min-width: 200px;
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: all 0.2s ease;
+    z-index: 20;
+}
+
+.primary-menu li:hover > ul {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.primary-menu li ul li {
+    padding: 6px 18px;
+    white-space: nowrap;
+}
+
+.rsvp-button {
+    border: 1px solid #F9F6F0;
+    padding: 8px 18px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 12px;
+    background: transparent;
+    color: #F9F6F0;                 /* ← GOLD TEXT WHEN NOT HOVERED */
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+/* Hover effect — elegant gold fill */
+.rsvp-button:hover {
+    background: #c8a26b;
+    color: #F9F6F0;
+    border-color: #c8a26b;
+}
+
+.rsvp-button {
+    box-shadow: 0 0 0 rgba(0,0,0,0);   /* prevent shift on hover */
+}
+
+.rsvp-button:hover {
+    box-shadow: 0 4px 12px rgba(200,162,107,0.35);
+}
+
+.nav-right .rsvp-button {
+    color: #F9F6F0 !important;
+}
+.nav-right .rsvp-button:hover {
+    color: #fff !important;
+}
+
+/* Header Layout */
+.site-header {
+    width: 100%;
+    position: fixed;
+    top: 0; left: 0;
+    background: #a47e1b;
+    z-index: 999;
+    transition: transform .35s ease;
+    border-bottom: 1px solid #e8e3d9;
+}
+
+.main-nav .nav-inner {
+    max-width: 1200px; /* Update the spacing in bewteen menus */
+    margin: auto;
+    padding: 12px 32px; /* Reduced header top-bottom spacing */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center everything */
+    gap: 90px; 
+    font-family: "Montserrat", sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+	font-weight: 300;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    gap: 28px;
+    flex: 1;               /* ensures they take equal width */
+    justify-content: center;
+}
+.nav-left li, .nav-right li { list-style: none; }
+.nav-left a, .nav-right a { 
+	color:#F9F6F0; 
+	text-decoration:none; 
+	font-weight: 400; /* update header text thickness */
+	font-size: 15px;
+}
+
+/* Center couple name between nav menus */
+.nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+/* Couple name in center */
+.nav-couple-name {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 28px;
+	font-weight: 500;
+    letter-spacing: 0.12em;
+    color: #F9F6F0;
+    text-transform: uppercase;
+    white-space: nowrap;
+    pointer-events: none; /* prevents blocking clicks on nav links */
+}
+
+/* Slightly smaller screens fix */
+@media (max-width: 1100px) {
+    .nav-couple-name {
+        font-size: 18px;
+        letter-spacing: 0.1em;
+    }
+}
+
+/* Push left menu a bit more left */
+.nav-left {
+    margin-left: -70px;   /* Update space between left menu */
+}
+
+/* Push right menu a bit more right */
+.nav-right {
+    margin-right: -70px;  /* Update space between right menu */
+}
+/* Gold underline hover effect for desktop nav links (excluding RSVP) */
+.nav-left a,
+.nav-right a {
+    position: relative;
+    padding-bottom: 4px; /* spacing for the underline */
+}
+
+.nav-left a::after,
+.nav-right a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px; 
+    width: 0%;
+    height: 2px;
+    background-color: #ffd100; /* gold color */
+    transition: width 0.3s ease;
+}
+
+/* Expand on hover */
+.nav-left a:hover::after,
+.nav-right a:hover::after {
+    width: 100%;
+}
+
+/* ❌ Exclude RSVP button */
+.nav-right .rsvp-button::after {
+    display: none !important;
+}
+
+/* Mobile  header section */
+.menu-dropdown { position: relative; }
+.menu-dropdown .dropdown-menu {
+    position: absolute;
+    background: #faf7f1;
+    top: 32px;
+    left: 0;
+    padding: 15px 20px;
+    border: 1px solid #e8e3d9;
+    display: none;
+}
+.menu-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* MOBILE HEADER NAVIGATION SECTION */
+.mobile-only { 
+    display: none; 
+}
+
+@media (max-width: 980px) {
+    .mobile-only {
+        display: flex !important;
+    }
+}
+
+/*****************************************************
+ NEW ELEGANT MOBILE MENU (LEFT SIDE SLIDE-IN)
+*****************************************************/
+
+/* --- MENU WRAPPER --- */
+.new-mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 78%;
+    max-width: 330px;
+    height: 100vh;
+    background: #ffffff;
+    box-shadow: 4px 0 18px rgba(0,0,0,0.15);
+    transform: translateX(-100%);
+    transition: all .35s ease;
+    z-index: 9998;
+    overflow-y: auto;
+}
+
+/* --- BLUE HEADER AREA --- */
+/* PURE COVER PHOTO HEADER */
+.mobile-profile-header {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 500px;
+    border-radius: 0 !important;
+    position: relative;
+}
+.mobile-profile-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.22);
+    border-radius: 0 !important;
+}
+
+.mobile-profile-names {
+    font-size: 20px;
+    color: #fff;
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 600;
+}
+
+.mobile-profile-sub {
+    font-size: 13px;
+    color: #eaeaea;
+    font-family: "Montserrat", sans-serif;
+}
+
+/* --- MENU ITEMS --- */
+.mobile-menu-list {
+    padding: 20px;
+}
+
+.mobile-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 12px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    color: #444;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background .2s ease;
+}
+
+.mobile-item:hover {
+    background: rgba(0,0,0,0.06);
+}
+
+.mobile-item .icon {
+    font-size: 18px;
+}
+
+/* RSVP item highlight */
+.mobile-item.rsvp-link {
+    font-weight: 600;
+    color: #A47C4F;
+}
+
+/* --- STATE WHEN OPEN --- */
+.new-mobile-menu.open {
+    transform: translateX(0);
+}
+
+/**************************************
+ FIX MOBILE HEADER VISIBILITY & LAYOUT
+***************************************/
+
+/* Hide desktop nav on mobile */
+@media (max-width: 980px) {
+    .nav-left,
+    .nav-right {
+        display: none !important;
+    }
+}
+
+/* Show mobile header */
+.mobile-header {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    height: 62px; /* Update mobile header height */
+    padding: 0 40px;
+    background: #faf7f1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10020;
+    border-bottom: 1px solid #e8e3d9;
+}
+
+/* Ensure RSVP button looks correct */
+.mobile-rsvp-inline {
+    padding: 6px 14px;
+    border: 1px solid #c29a5b;
+    background: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #6b5436;
+}
+
+/* HAMBURGER ICON FIX */
+.hamburger {
+    width: 26px;
+    height: 16px;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 10030;
+}
+
+.hamburger span {
+    height: 2px;
+    background: #574c3b;
+    border-radius: 2px;
+    transition: .35s;
+}
+
+/* X animation */
+.hamburger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Push content down so it doesn't go behind header */
+@media (max-width:980px) {
+    body {
+        padding-top: 62px;
+    }
+}
+
+/* Hide mobile header when menu is open */
+.mobile-header.hide {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+/**************************************
+ ELEGANT WEDDING MOBILE MENU PANEL
+***************************************/
+
+/* Panel container refinement */
+.new-mobile-menu {
+    background: #ffffff;
+    border-radius: 0 24px 24px 0 !important; /* ❗ remove top-right curve */
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(6px);
+    padding-bottom: 20px;
+    border-right: 1px solid rgba(194, 154, 91, 0.20);
+    height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.new-mobile-menu {
+    border: 2px solid rgba(194, 154, 91, 0.55);
+    border-left: none; /* so it blends with the edge */
+}
+
+
+/* Cover header refinement */
+.mobile-profile-header {
+    height: 360px; /* taller for portrait photo */
+    background-position: center;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Optional elegant soft dark fade */
+.mobile-profile-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.05),
+        rgba(0,0,0,0.28)
+    );
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+}
+
+/* Menu spacing */
+.mobile-menu-list {
+    padding: 26px 20px;
+}
+
+/* Each row item */
+.mobile-item {
+    padding: 10px 10px;
+    margin-bottom: 4px;
+    font-size: 15px;
+    letter-spacing: .02em;
+}
+
+/* Elegant hover */
+.mobile-item:hover {
+    background: rgba(194, 154, 91, 0.12); /* soft champagne gold */
+    transform: translateX(4px);
+}
+
+/* Icons */
+.mobile-item .icon {
+    font-size: 20px;
+    opacity: 0.8;
+}
+
+/* Highlight for RSVP */
+.mobile-item.rsvp-link {
+    font-weight: 600;
+    color: #b08a57; /* wedding gold tone */
+}
+
+.mobile-item {
+    padding: 14px 6px;
+    margin: 2px 0;
+    color: #4a4a4a;
+    font-size: 16px;
+    letter-spacing: 0.015em;
+    font-family: "Montserrat", sans-serif;
+    border-bottom: 1px solid rgba(180, 150, 100, 0.10); /* subtle divider */
+    transition: all .25s ease;
+}
+
+.mobile-item:last-child {
+    border-bottom: none;
+}
+
+/* Elegant hover slide */
+.mobile-item:hover {
+    color: #b08a57; /* soft champagne gold */
+    transform: translateX(6px);
+}
+
+.hide {
+    display: none !important;
+}
+
+.mobile-profile-header {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    overflow: hidden !important;
+}
+
+/* === UPDATED MOBILE HEADER (Oscar & Julienne + RSVP + Hamburger) === */
+
+.mobile-header {
+    display: flex !important;
+    justify-content: center; /* center entire inner wrapper */
+    align-items: center;
+    height: 72px; /* update header height */
+    padding: 0;
+    background: #a47e1b;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10020;
+    border-bottom: 1px solid #e8e3d9;
+}
+
+/* Inner wrapper to control spacing */
+.mobile-header-inner {
+    width: 100%;
+    max-width: 520px; /* gives even better center alignment */
+    display: flex;
+    justify-content: space-between; /* couples name left / buttons right */
+    align-items: center;
+    padding: 0 18px; /* ← adjust this for global spacing */
+}
+
+/* Couple Name */
+.mobile-couple-name {
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #F9F6F0;
+    text-align: left;
+    margin-left: -6px; /* ← move names further left */
+}
+
+/* GOLD RSVP BUTTON */
+.mobile-rsvp-gold {
+    padding: 7px 18px;
+    background: #F9F6F0; /* gold */
+    color: #a47e1b !important;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+	font-weight: 400;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-right: 16px; /* ← move whole group left */
+}
+
+/* Move hamburger to the left (fix clipping on right side) */
+.mobile-header .hamburger {
+    margin-right: -6px;  /* ← pulls hamburger left */
+    transform: scale(1.05); /* optional: make slightly bigger */
+}
+
+/* =========================================
+   STACKED NAMES — Screenshot 1 Style
+   ========================================= */
+.mobile-couple-name {
+    font-family: "Montserrat", sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.05;
+    color: #F9F6F0;
+    text-transform: uppercase;
+    margin-left: 10px; /* move left */
+	letter-spacing: 0.12em;
+}
+
+/* ================================================================
+   D — LUXURY DOT-MENU ICON (Gold background + white accents)
+   ================================================================ */
+
+.menu-icon-dotmenu {
+    width: 44px;
+    height: 38px;
+    background: #F9F6F0;            /* gold */
+    border-radius: 12px;             /* elegant rounded box */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+/* 🔥 Active animation — convert lines into an X */
+.menu-icon-dotmenu.active .lines span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.menu-icon-dotmenu.active .lines span:nth-child(2) {
+    opacity: 0;
+}
+.menu-icon-dotmenu.active .lines span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ================================================================
+   D — LUXURY DOT-MENU ICON (Gold background + white accents)
+   ================================================================ */
+
+.menu-icon-dotmenu {
+    width: 44px;
+    height: 38px;
+    background: #F9F6F0;            /* gold */
+    border-radius: 12px;             /* elegant rounded box */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+/* Three horizontal lines */
+.menu-icon-dotmenu .lines {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 16px;
+	
+}
+
+.menu-icon-dotmenu .lines span {
+    width: 16px;
+    height: 2px;
+    background: #a47e1b;            /* white lines */
+    border-radius: 2px;
+    transition: 0.3s ease;
+}
+
+/* Accent dot */
+.menu-icon-dotmenu .dot {
+    width: 7px;
+    height: 7px;
+    background: #a47e1b;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* 🔥 Active animation — convert lines into an X */
+.menu-icon-dotmenu.active .lines span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.menu-icon-dotmenu.active .lines span:nth-child(2) {
+    opacity: 0;
+}
+.menu-icon-dotmenu.active .lines span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobile-right-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;        /* spacing between RSVP & icon */
+    margin-right: 10px;
+}
+
+/* 🔒 Hide mobile header on desktop */
+@media (min-width: 981px) {
+    .mobile-header {
+        display: none !important;
+    }
+}
+
+/* 🔒 Hide desktop header on mobile */
+@media (max-width: 980px) {
+    .desktop-only {
+        display: none !important;
+    }
+}
+
+/* =========================
+   HERO SECTION — EDITORIAL LUXURY
+   ========================= */
+.hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #0d0d0d;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.02);
+}
+
+/* overlay */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 28px;
+  background:
+    linear-gradient(to bottom,
+      rgba(0,0,0,0.55) 0%,
+      rgba(0,0,0,0.42) 28%,
+      rgba(0,0,0,0.52) 68%,
+      rgba(0,0,0,0.72) 100%);
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 180px;
+}
+
+/* gold line */
+.hero-topline {
+  width: 160px;
+  height: 1px;
+  margin: 18px auto 18px; /* 🔥 balanced between name & XVIII */
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(200,162,77,0.95),
+    transparent
+  );
+  box-shadow: 0 0 18px rgba(200,162,77,0.28);
+}
+
+/* kicker */
+.hero-kicker {
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(249,246,240,0.72);
+  margin-bottom: 26px;
+}
+
+/* title */
+.hero-title {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  line-height: 0.92;
+  color: #F9F6F0;
+  text-shadow: 0 6px 20px rgba(0,0,0,0.18);
+}
+
+/* subtitle */
+.hero-subtitle {
+  margin-top: 26px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: #C8A24D;
+  text-shadow: 0 4px 14px rgba(0,0,0,0.14);
+}
+
+/* desktop */
+.hero-desktop {
+  display: block;
+  height: 100vh;
+  min-height: 700px;
+}
+
+.hero-desktop .hero-title {
+  font-size: clamp(52px, 6vw, 90px);
+}
+.hero-desktop .hero-kicker {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hero-desktop .hero-subtitle {
+  font-size: 24px;
+  font-weight: 600;
+  transform: translateY(-26px); /* 🔥 moves upward */
+}
+
+/* mobile */
+.hero-mobile {
+  display: none;
+  height: 100vh;
+  min-height: 620px;
+}
+
+.hero-mobile .hero-content {
+  max-width: 360px;
+}
+
+.hero-mobile .hero-topline {
+  width: 100px;
+  margin-bottom: 22px;
+}
+
+.hero-mobile .hero-kicker {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  margin-bottom: 18px;
+}
+
+.hero-mobile .hero-title {
+  font-size: clamp(48px, 13vw, 74px);
+  letter-spacing: 0.08em;
+  line-height: 0.95;
+}
+
+.hero-mobile .hero-subtitle {
+  margin-top: 18px;
+  font-size: 11px;
+  letter-spacing: 0.30em;
+}
+
+/* switch */
+@media (max-width: 768px) {
+  .hero-desktop {
+    display: none;
+  }
+
+  .hero-mobile {
+    display: block;
+  }
+}
+
+.hero-img {
+  transition: opacity 1.4s ease, transform 1.8s ease;
+  will-change: opacity, transform;
+}
+
+/* Prevent hero text flash before JS animation */
+[data-hero-item] {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(4px);
+  will-change: opacity, transform, filter;
+}
+
+/* Final visible state after JS */
+.hero-is-visible [data-hero-item] {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.hero-img {
+  opacity: 0;
+}
+
+/* ======================================
+   WELCOME SECTION — CENTERED EDITORIAL LUXURY
+====================================== */
+.welcome-section {
+    background: #a47e1b;
+    padding: clamp(90px, 10vw, 140px) 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* subtle luxury background glow */
+.welcome-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(200,162,77,0.10), transparent 30%),
+        radial-gradient(circle at 85% 75%, rgba(200,162,77,0.08), transparent 24%);
+    opacity: 0.9;
+}
+
+.welcome-kicker::after {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 1px;
+
+    margin: 14px auto 0;
+
+    background: linear-gradient(
+        to right,
+        transparent,
+        #ffff3f,
+        transparent
+    );
+}
+.welcome-wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.welcome-content {
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.welcome-kicker {
+    font-family: "Montserrat", sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #F9F6F0;
+    margin-bottom: 20px;
+}
+
+.welcome-text {
+    margin: 0 auto;
+    max-width: 620px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(30px, 3.2vw, 44px);
+    line-height: 1.5;
+    letter-spacing: 0.015em;
+    color: #F9F6F0;
+}
+
+.welcome-lead {
+    display: block;
+    margin-bottom: 16px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #ffff3f;
+}
+
+.welcome-name {
+    margin-top: 38px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.30em;
+    text-transform: uppercase;
+    color: #ffff3f;
+}
+
+.welcome-name::before {
+    content: "";
+    display: block;
+    width: 72px;
+    height: 1px;
+    background: #ffff3f;
+    margin: 0 auto 16px;
+}
+
+/* ===============================
+   WELCOME BORDER BOX
+=============================== */
+.welcome-box {
+    border: 1px solid rgba(200,162,77,0.6); /* 🔥 gold border */
+    padding: clamp(28px, 3vw, 44px);
+    margin: 0 auto;
+    max-width: 680px;
+
+    background: rgba(255,255,255,0.25); /* subtle luxury feel */
+    backdrop-filter: blur(4px);         /* glassy effect (optional) */
+}
+
+.welcome-content {
+    display: flex;
+    justify-content: center;
+}
+
+/* ======================================
+   MOBILE
+====================================== */
+@media (max-width: 768px) {
+    .welcome-section {
+        padding: 76px 18px;
+    }
+
+    .welcome-section::after {
+        top: 34px;
+        width: 64px;
+    }
+
+    .welcome-wrap,
+    .welcome-content {
+        max-width: 100%;
+    }
+
+    .welcome-kicker {
+        font-size: 13px;
+        letter-spacing: 0.22em;
+        margin-bottom: 16px;
+    }
+
+    .welcome-text {
+        max-width: 320px;
+        font-size: clamp(24px, 7vw, 30px);
+        line-height: 1.55;
+    }
+
+    .welcome-lead {
+        font-size: 13px;
+        letter-spacing: 0.18em;
+        margin-bottom: 12px;
+    }
+
+    .welcome-name {
+        margin-top: 28px;
+        font-size: 13px;
+        letter-spacing: 0.20em;
+    }
+
+    .welcome-name::before {
+        width: 56px;
+        margin-bottom: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .welcome-box {
+        padding: 22px 18px;
+        max-width: 100%;
+    }
+}
+
+/* =====================================
+   A MESSAGE FROM THE DEBUTANTE SECTION
+===================================== */
+.message-debutante-section {
+  background: #000000;
+  padding: clamp(70px, 8vw, 120px) 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.message-debutante-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* Header */
+.message-debutante-header {
+  text-align: left;
+  margin-bottom: 12px;
+}
+
+.message-debutante-kicker {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 12px;
+  font-weight: 500;
+  color: #C8A24D;
+  margin-bottom: 14px;
+}
+
+.message-debutante-title {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin: 0;
+  font-size: clamp(38px, 4.5vw, 62px);
+  color: #F9F6F0;
+  line-height: 1.08;
+}
+
+.message-debutante-mark {
+  position: absolute;
+  top: 22px;
+  left: 28px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(80px, 10vw, 120px);
+  line-height: 1;
+  color: rgba(200,162,77,0.18);
+  pointer-events: none;
+}
+
+/* Body */
+.message-debutante-body {
+  position: relative;
+  text-align: center;
+}
+
+.debutante-text {
+  max-width: 100%;
+  margin: 0 0 18px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(18px, 1.7vw, 23px);
+  line-height: 1.72;
+  letter-spacing: 0.01em;
+  color: #F9F6F0;
+  text-align: justify;
+}
+
+.debutante-text:last-child {
+  margin-bottom: 0;
+}
+
+/* Drop cap */
+.has-dropcap {
+  position: relative;
+}
+
+.dropcap {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 64px;
+  line-height: 0.72;
+  color: #C8A24D;
+  font-weight: 500;
+  display: inline-block;
+  margin-right: 2px;
+  position: relative;
+  top: 4px;
+}
+
+/* Footer */
+.message-debutante-footer {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-top: 34px;
+}
+
+.message-debutante-signoff {
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #F9F6F0;
+  margin-bottom: 10px;
+}
+
+.message-debutante-signature {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: clamp(34px, 4vw, 48px);
+  color: #C8A24D;
+  line-height: 1.1;
+}
+
+/* =========================
+   MESSAGE DEBUTANTE LAYOUT
+   ========================= */
+.message-debutante-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(340px, 0.92fr) minmax(0, 0.92fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.message-debutante-content {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Photo */
+.message-debutante-photo {
+  position: relative;
+  margin: 0;
+  margin-top: 45px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 16px 42px rgba(0,0,0,0.12);
+}
+
+.message-debutante-photo img {
+  width: 100%;
+  height: 570px;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+  transform: scale(1.05);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .message-debutante-section {
+    padding: 60px 16px;
+  }
+
+  .message-debutante-shell {
+    max-width: 100%;
+    padding: 0 8px;
+  }
+
+  .message-debutante-mark {
+    top: 10px;
+    left: 14px;
+    font-size: 68px;
+  }
+
+  .message-debutante-grid {
+    grid-template-columns: 1fr !important;
+    gap: 22px;
+    align-items: start;
+  }
+
+  .message-debutante-photo {
+    border-radius: 18px;
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .message-debutante-photo img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    display: block;
+  }
+
+  .debutante-text {
+    max-width: 100%;
+    padding: 0 8px;
+    font-size: 17px;
+    line-height: 1.72;
+    letter-spacing: 0.01em;
+    text-align: left;
+  }
+
+  .dropcap {
+    font-size: 44px;
+    top: 2px;
+    margin-right: 1px;
+  }
+
+  .message-debutante-content {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .message-debutante-body,
+  .message-debutante-footer {
+    text-align: center;
+  }
+
+  .message-debutante-footer {
+    margin-top: 24px;
+  }
+
+  .message-debutante-signature {
+    font-size: 34px;
+  }
+}
+
+@media (min-width: 769px) {
+  .message-debutante-header {
+    max-width: 800px;
+    margin-left: 0;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .message-debutante-header {
+    text-align: center;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 24px;
+  }
+}
+
+@media (min-width: 769px) {
+  .message-debutante-content {
+    margin-top: 40px;  /* 🔥 pushes ALL text down */
+  }
+}
+
+@media (min-width: 769px) {
+  .debutante-text {
+    font-size: 20px;   /* 🔥 smaller & more premium */
+    line-height: 1.75; /* optional: improves readability */
+  }
+}
+
+/* =====================================
+   MESSAGE DEBUTANTE — SCROLL REVEAL
+===================================== */
+
+/* initial hidden state */
+.message-debutante-section .message-debutante-kicker,
+.message-debutante-section .message-debutante-title,
+.message-debutante-section .message-debutante-photo,
+.message-debutante-section .message-debutante-body,
+.message-debutante-section .message-debutante-footer {
+  opacity: 0;
+  filter: blur(3px);
+  will-change: opacity, transform, filter;
+}
+
+/* different starting directions */
+.message-debutante-section .message-debutante-kicker,
+.message-debutante-section .message-debutante-title {
+  transform: translateY(22px);
+}
+
+.message-debutante-section .message-debutante-photo {
+  transform: translateY(28px) scale(0.98);
+}
+
+.message-debutante-section .message-debutante-body {
+  transform: translateY(26px);
+}
+
+.message-debutante-section .message-debutante-footer {
+  transform: translateY(20px);
+}
+
+/* transition timing */
+.message-debutante-section .message-debutante-kicker,
+.message-debutante-section .message-debutante-title,
+.message-debutante-section .message-debutante-photo,
+.message-debutante-section .message-debutante-body,
+.message-debutante-section .message-debutante-footer {
+  transition:
+    opacity 900ms ease,
+    transform 1000ms cubic-bezier(.2,.8,.2,1),
+    filter 900ms ease;
+}
+
+/* visible state */
+.message-debutante-section.is-visible .message-debutante-kicker,
+.message-debutante-section.is-visible .message-debutante-title,
+.message-debutante-section.is-visible .message-debutante-photo,
+.message-debutante-section.is-visible .message-debutante-body,
+.message-debutante-section.is-visible .message-debutante-footer {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* stagger */
+.message-debutante-section.is-visible .message-debutante-kicker {
+  transition-delay: 0ms;
+}
+
+.message-debutante-section.is-visible .message-debutante-title {
+  transition-delay: 120ms;
+}
+
+.message-debutante-section.is-visible .message-debutante-photo {
+  transition-delay: 260ms;
+}
+
+.message-debutante-section.is-visible .message-debutante-body {
+  transition-delay: 420ms;
+}
+
+.message-debutante-section.is-visible .message-debutante-footer {
+  transition-delay: 560ms;
+}
+
+/* =====================================
+   COUNTDOWN SECTION — EDITORIAL LUXURY
+===================================== */
+.date-countdown {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 54px 20px 48px;
+    font-family: "Cormorant Garamond", serif;
+    color: #F9F6F0;
+    background: #120b06; /* fallback while video loads */
+}
+
+/* Background video */
+.countdown-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.95;
+    transform: scale(1.03);
+    pointer-events: none;
+}
+
+/* Richer dark overlay */
+.date-countdown::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(to bottom,
+        rgba(20,10,4,0.30),
+        rgba(28,14,5,0.35) 35%,
+        rgba(24,12,4,0.40) 100%);
+    pointer-events: none;
+}
+
+/* subtle inner glow */
+.date-countdown::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at center, rgba(255,215,140,0.06), transparent 55%);
+}
+
+.date-countdown > *:not(.countdown-bg-video) {
+    position: relative;
+    z-index: 3;
+}
+
+/* Floral images */
+.countdown-floral {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.countdown-floral.top {
+    margin-bottom: 18px;
+    transform: translateY(-25px); /* moves it UP */
+}
+
+.countdown-floral.bottom {
+    margin-top: 26px;
+    transform: translateY(25px); /* moves it DOWN */
+}
+
+.countdown-floral img {
+    max-width: 420px;
+    width: 100%;
+    opacity: 0.92;
+    display: block;
+}
+
+/* Venue + Date card */
+.date-countdown .wedding-date {
+    display: inline-block;
+    min-width: min(92vw, 540px);
+    padding: 18px 28px;
+    margin: 0 auto 30px;
+    border: 1px solid rgba(255,255,255,0.26);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.06) inset,
+      0 14px 32px rgba(0,0,0,0.18);
+    font-size: 18px;
+    line-height: 1.65;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #F9F6F0;
+}
+
+/* Main divider */
+.countdown-divider {
+    width: min(78%, 460px);
+    margin: 0 auto 34px;
+    border: 0;
+    border-top: 1px solid rgba(255,255,255,0.70);
+    opacity: 0.92;
+}
+
+/* Ceremony + reception group */
+.ceremony-reception {
+    max-width: 520px;
+    margin: 0 auto 42px;
+}
+
+.event-block {
+    margin-bottom: 0;
+}
+
+/* Titles */
+.event-title {
+    font-size: 18px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #F9F6F0;
+}
+
+/* Time */
+.event-sub {
+    font-family: "Montserrat", sans-serif;
+    font-size: 17px;
+    font-style: italic;
+    font-weight: 500;
+    color: rgba(255,255,255,0.96);
+    margin-bottom: 0;
+}
+
+/* Divider between ceremony and reception */
+.countdown-inner-line {
+    width: min(70%, 330px);
+    border: 0;
+    border-top: 1px solid rgba(255,255,255,0.62);
+    margin: 24px auto 26px;
+}
+
+/* Countdown wrapper */
+.countdown {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(110px, 1fr));
+    gap: 18px;
+    justify-content: center;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+/* Each time box */
+.time-box {
+    text-align: center;
+    padding: 18px 12px 16px;
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 14px;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow:
+      0 10px 26px rgba(0,0,0,0.16),
+      0 0 0 1px rgba(255,255,255,0.04) inset;
+}
+
+/* Numbers */
+.time-number {
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(30px, 3vw, 42px);
+    line-height: 1;
+    letter-spacing: 0.06em;
+    color: #ffffff;
+    margin-bottom: 12px;
+    font-weight: 400;
+}
+
+/* Labels */
+.time-label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.88);
+}
+
+/* =====================================
+   TABLET
+===================================== */
+@media (max-width: 900px) {
+    .date-countdown {
+        padding: 48px 18px 42px;
+    }
+
+    .date-countdown .wedding-date {
+        min-width: unset;
+        width: min(92vw, 500px);
+        font-size: 17px;
+        padding: 16px 20px;
+        letter-spacing: 0.14em;
+    }
+
+    .countdown {
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+        max-width: 360px;
+        gap: 16px;
+    }
+
+    .time-box {
+        padding: 18px 10px 14px;
+    }
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+@media (max-width: 640px) {
+    .date-countdown {
+        padding: 42px 16px 36px;
+    }
+
+    .countdown-floral.top {
+        margin-bottom: 10px;
+    }
+
+    .countdown-floral.bottom {
+        margin-top: 10px;
+    }
+
+    .countdown-floral img {
+        max-width: 200px;
+        opacity: 0.9;
+    }
+
+    .date-countdown .wedding-date {
+        width: 100%;
+        max-width: 260px;
+        padding: 14px 16px;
+        margin-bottom: 24px;
+        font-size: 14px;
+        line-height: 1.55;
+        letter-spacing: 0.12em;
+        border-radius: 12px;
+    }
+
+    .countdown-divider {
+        width: min(82%, 260px);
+        margin-bottom: 26px;
+    }
+
+    .ceremony-reception {
+        margin-bottom: 30px;
+    }
+
+    .event-title {
+        font-size: 15px;
+        letter-spacing: 0.22em;
+        margin-bottom: 8px;
+    }
+
+    .event-sub {
+        font-size: 15px;
+    }
+
+    .countdown-inner-line {
+        width: min(72%, 220px);
+        margin: 18px auto 20px;
+    }
+
+    .countdown {
+        grid-template-columns: repeat(2, minmax(110px, 1fr));
+        max-width: 290px;
+        gap: 12px;
+    }
+
+    .time-box {
+        padding: 14px 8px 12px;
+        border-radius: 12px;
+    }
+
+    .time-number {
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+
+    .time-label {
+        font-size: 9px;
+        letter-spacing: 0.18em;
+    }
+}
+
+@media (max-width: 640px) {
+
+    .date-countdown {
+        min-height: 70vh; /* 🔥 extend top & bottom space */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* centers vertically */
+        padding: 60px 16px; /* reduce reliance on padding */
+    }
+
+}
+
+/* =====================================
+   COUNTDOWN REVEAL ANIMATION
+===================================== */
+.js-countdown-reveal .js-countdown-item {
+    opacity: 0;
+    transform: translateY(26px);
+    filter: blur(3px);
+    transition:
+        opacity 900ms ease,
+        transform 1000ms cubic-bezier(.2,.8,.2,1),
+        filter 900ms ease;
+    will-change: opacity, transform, filter;
+}
+
+.js-countdown-reveal.is-visible .js-countdown-item {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+/* stagger */
+.js-countdown-reveal.is-visible .js-countdown-item:nth-child(1) {
+    transition-delay: 0ms;
+}
+
+.js-countdown-reveal.is-visible .js-countdown-item:nth-child(2) {
+    transition-delay: 140ms;
+}
+
+.js-countdown-reveal.is-visible .js-countdown-item:nth-child(3) {
+    transition-delay: 280ms;
+}
+
+.js-countdown-reveal.is-visible .js-countdown-item:nth-child(4) {
+    transition-delay: 420ms;
+}
+
+.js-countdown-reveal.is-visible .js-countdown-item:nth-child(5) {
+    transition-delay: 560ms;
+}
+
+/* countdown boxes animate slightly after section reveal */
+.js-countdown-reveal .time-box {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+    transition:
+        opacity 700ms ease,
+        transform 800ms cubic-bezier(.2,.8,.2,1);
+}
+
+.js-countdown-reveal.is-visible .time-box {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.js-countdown-reveal.is-visible .time-box:nth-child(1) { transition-delay: 520ms; }
+.js-countdown-reveal.is-visible .time-box:nth-child(2) { transition-delay: 620ms; }
+.js-countdown-reveal.is-visible .time-box:nth-child(3) { transition-delay: 720ms; }
+.js-countdown-reveal.is-visible .time-box:nth-child(4) { transition-delay: 820ms; }
+
+/* GALLERY SECTION */
+
+/* Container */
+.gallery-section {
+    padding: 80px 40px;
+	background-color: #000;
+}
+
+/* Header */
+.gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.gallery-header .section-label {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 12px;
+  font-weight: 500;
+  color: #C8A24D;
+  margin-bottom: 14px;
+}
+
+.gallery-header h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin: 0;
+  font-size: clamp(38px, 4.5vw, 62px);
+  color: #F9F6F0;
+  line-height: 1.08;
+}
+
+.gallery-header .view-all {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid #c29a5b;
+    padding: 10px 22px;
+}
+
+/* -----------------------------------------
+   GRID — NO MASONRY, NATURAL IMAGE SIZES
+------------------------------------------*/
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    background-color: #f2f2f2;
+    cursor: pointer;
+
+    border-radius: 15px;                 /* adjust corner roundness here */
+    border: 1px solid #C29A5B;         /* gold border */
+}
+
+/* Natural aspect images */
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    backface-visibility: visible;
+    transform: none;
+    -webkit-transform: none;
+    image-rendering: auto;
+}
+
+/* Hover overlay */
+.hover-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0,0,0,0.40);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.gallery-item:hover .hover-overlay {
+    opacity: 1;
+}
+
+.magnify-circle {
+    display: none; /* Fully removed */
+}
+
+/* -----------------------------------------
+   RESPONSIVE GRID
+------------------------------------------*/
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile — 2 column grid */
+@media (max-width: 640px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .gallery-section {
+        padding: 40px 18px;
+    }
+}
+
+/* -----------------------------------------
+   SAFARI / iOS FIXES
+------------------------------------------*/
+
+@supports (-webkit-overflow-scrolling: touch) {
+    .gallery-item img {
+        backface-visibility: visible !important;
+        transform: none !important;
+        -webkit-transform: none !important;
+        image-rendering: auto !important;
+    }
+}
+
+/* Hide broken images */
+.gallery-item img:not([src]),
+.gallery-item img[src=""] {
+    display: none !important;
+}
+
+/* -----------------------------------------
+   LIGHTBOX
+------------------------------------------*/
+
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.lightbox-overlay.active {
+    display: flex;
+}
+
+.lightbox-content {
+    max-width: 92vw;
+    max-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-image {
+    width: auto;
+    height: auto;
+    max-width: 92vw;
+    max-height: 92vh;
+    object-fit: contain;
+    border-radius: 6px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.lightbox-image.fade-in {
+    opacity: 1;
+}
+
+.lightbox-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px;
+    color: rgba(255,255,255,0.85);
+    padding: 10px 18px;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.25s ease;
+    z-index: 10000;
+}
+
+.lightbox-arrow.left {
+    left: 10px;
+}
+.lightbox-arrow.right {
+    right: 10px;
+}
+
+@media (min-width: 641px) {
+    .lightbox-arrow:hover {
+        color: #c29a5b;
+        transform: translateY(-50%) scale(1.1);
+    }
+}
+
+@media (max-width: 640px) {
+    .lightbox-arrow {
+        font-size: 34px;
+        padding: 8px 12px;
+        color: rgba(255,255,255,0.95);
+    }
+}
+#gallery.js-animate {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+/* Masonry Layout for Desktop */
+@media (min-width: 1025px) {
+    .gallery-grid {
+        column-count: 3;
+        column-gap: 12px;
+    }
+
+    .gallery-item {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 12px;
+    }
+}
+/* Masonry Layout — Desktop Only */
+@media (min-width: 1025px) {
+    .gallery-grid {
+        display: block !important;   /* IMPORTANT: disable CSS grid */
+        column-count: 3;
+        column-gap: 12px;
+    }
+
+    .gallery-item {
+        width: 100%;
+        display: inline-block;
+        margin-bottom: 12px;
+        break-inside: avoid;   /* Prevents items from splitting */
+    }
+}
+/* Masonry — Mobile (2 columns) */
+.gallery-grid {
+    display: block !important;   /* Turn OFF CSS Grid everywhere */
+    column-count: 2;
+    column-gap: 10px;
+}
+
+.gallery-item {
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 10px;
+    break-inside: avoid;
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+    .gallery-grid {
+        column-count: 2; /* or 3 if you want */
+        column-gap: 12px;
+    }
+
+    .gallery-item {
+        margin-bottom: 12px;
+    }
+}
+/* Lightbox close button (default for desktop & mobile) */
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;      /* 🔥 now on the RIGHT for ALL devices */
+    left: auto;       /* remove old desktop left position */
+    font-size: 36px;
+    color: rgba(255,255,255,0.85);
+    cursor: pointer;
+    z-index: 11000;
+    transition: 0.25s ease;
+    user-select: none;
+}
+
+/* Hover effect (desktop only) */
+@media (min-width: 641px) {
+    .lightbox-close:hover {
+        color: #c29a5b;
+        transform: scale(1.15);
+    }
+}
+
+/* 🔥 MOBILE: slightly bigger X icon */
+@media (max-width: 640px) {
+    .lightbox-close {
+        font-size: 44px;   /* bigger size for small screens */
+        top: 18px;
+        right: 18px;
+    }
+}
+/* -----------------------------------------
+   MOBILE — SINGLE COLUMN STACK (NO MASONRY)
+------------------------------------------ */
+@media (max-width: 640px) {
+
+    .gallery-grid {
+        display: grid !important;        /* bring back grid */
+        grid-template-columns: 1fr;      /* ONE column */
+        column-count: unset !important;  /* disable masonry */
+        column-gap: 0;
+        gap: 14px;
+    }
+
+    .gallery-item {
+        display: block;
+        width: 100%;
+        margin-bottom: 0;
+        break-inside: auto;
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+}
+
+/* ENTOURAGE SECTION */
+
+#entourage {
+    background-color: #a47e1b;
+    padding: 80px 0 90px;
+    text-align: center;
+}
+
+.entourage-wrap{ padding:24px 0; }   /* keep if you want a bit of spacing */
+
+.entourage-grid{
+  display: grid;
+  grid-template-columns: 1fr;       /* ← always one column */
+  gap: 18px;
+  max-width: 820px;                 /* desktop width cap (adjust if you like) */
+  margin-inline: auto;
+  justify-items: center;            /* center each image in the column */
+}
+
+.entourage-grid img{
+  width: 100%;
+  max-width: 720px;                 /* keeps each page nicely sized on desktop */
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.06);
+  background: #eee;
+  cursor: zoom-in;
+}
+
+/* Optional: slightly tighter on phones */
+@media (max-width: 900px){
+  .entourage-grid{
+    gap: 14px;
+    max-width: 700px;
+  }
+  .entourage-grid img{
+    max-width: none;                /* let it fill the column */
+  }
+}
+
+/* Phones: stack one per row and shrink florals */
+@media (max-width:900px){
+  .entourage-grid{
+    grid-template-columns: 1fr;  /* vertical */
+    max-width: 720px;
+  }
+  .entourage-wrap{ padding:16px 0; }
+  .entourage-wrap .flower{ width:min(140px, 28vw); }
+  .entourage-wrap .flower.left{  left:-8vw;  transform:translateY(-50%); }
+  .entourage-wrap .flower.right{ right:-8vw; transform:translateY(-50%) scaleX(-1); }
+}
+
+/* Center items in their cells */
+.entourage-grid{
+  justify-items: center;
+}
+
+/* Mobile already stacks to 1 column; keep it full-width there */
+@media (max-width:900px){
+  .entourage-grid{
+    grid-template-columns: 1fr;
+    max-width: 720px;
+    justify-items: stretch;  /* let images go full width on phones */
+  }
+  .entourage-grid img{ max-width: none; }
+}
+
+/* ENT — mobile 1-col, desktop 3-col */
+.entourage-wrap{ padding:24px 0; }
+
+.entourage-grid{
+  display:grid;
+  grid-template-columns: 1fr;   /* default: stack vertically */
+  gap:18px;
+  max-width:720px;              /* nice width on phones */
+  margin-inline:auto;
+  justify-items:center;
+}
+
+.entourage-grid img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:12px;
+  box-shadow:0 12px 30px rgba(0,0,0,.06);
+  background:#eee;
+  cursor:zoom-in;
+}
+
+/* Desktop: 3 across in one row */
+@media (min-width:1024px){
+  .entourage-grid{
+    grid-template-columns: repeat(3, minmax(0,1fr));
+  /* stretch to full container width on desktop */
+    max-width:1200px;
+    gap:22px;
+    justify-items:stretch;
+  }
+  .entourage-grid img{ max-width:none; } /* remove any caps */
+}
+
+/* Subtitle */
+.entourage-subtitle {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 12px;
+  font-weight: 500;
+  color: #F9F6F0;
+  margin-bottom: 14px;
+}
+
+/* Title */
+.entourage-title {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin: 0;
+  font-size: clamp(38px, 4.5vw, 62px);
+  color: #F9F6F0;
+  line-height: 1.08;
+}
+
+/* GOLD DIVIDER LINES */
+.entourage-divider-top,
+.entourage-divider-bottom {
+    width: 90%;
+    max-width: 700px;
+    height: 1px;
+    background: #F9F6F0;
+    margin: 35px auto;
+}
+
+/* IMAGE GRID */
+.entourage-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    max-width: 820px;
+    margin: 0 auto;
+    justify-items: center;
+}
+
+.entourage-grid img {
+    width: 100%;
+    max-width: 720px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.06);
+    background: #eee;
+    cursor: zoom-in;
+    opacity: 1;              /* ← always visible */
+    transform: none;         /* ← no initial offset */
+    transition: transform .7s ease;  /* keep hover smooth, no fade needed */
+}
+
+/* Desktop → 3 per row */
+@media (min-width: 1024px) {
+    .entourage-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+        max-width: 1200px;
+        justify-items: stretch;
+    }
+    .entourage-grid img {
+        max-width: none;
+    }
+}
+/* Lightbox image fade animation */
+.lightbox-image {
+    opacity: 0;
+    transition: opacity .4s ease;
+}
+
+.lightbox-image.fade-in {
+    opacity: 1;
+}
+.entourage-item {
+    position: relative;
+    cursor: pointer;
+    opacity: 1;
+    transform: none;
+}
+.entourage-item.in-view {
+    opacity: 1;
+    transform: none;
+}
+@media (max-width: 768px) {
+    .entourage-grid img {
+        width: 95%;       /* update entourage photo size in mobile */
+        margin: 0 auto;   /* center the photo */
+        display: block;
+    }
+}
+.entourage-grid img {
+    border: 1px solid rgba(181,147,92,0.85); /* update entourage photo border color */
+    box-shadow: 
+        0 8px 18px rgba(0,0,0,0.15),
+        0 0 12px rgba(181,147,92,0.35);
+}
+
+/* ✅ DESKTOP ONLY: 3 ON TOP, 2 CENTERED BELOW */
+@media (min-width: 1024px) {
+
+    /* Make entourage grid a flex container on desktop */
+    .entourage-grid {
+        display: flex !important;
+        flex-wrap: wrap;                 /* allow two rows */
+        justify-content: center;         /* center items in each row */
+        column-gap: 22px;
+        row-gap: 22px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Each card takes ~1/3 of the row width */
+    .entourage-grid .entourage-item {
+        flex: 0 1 calc(33.333% - 22px);
+    }
+
+    /* Ensure images fill their cards */
+    .entourage-grid .entourage-item img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* =====================================
+   SCROLL REVEAL — GALLERY + ENTOURAGE
+===================================== */
+
+/* Initial hidden state */
+.js-gallery-item,
+.js-entourage-item {
+    opacity: 0;
+    transform: translateY(34px) scale(0.985);
+    transition:
+        opacity 0.9s ease,
+        transform 0.9s cubic-bezier(.2,.8,.2,1);
+    will-change: opacity, transform;
+}
+
+/* Visible state */
+.js-gallery-item.is-visible,
+.js-entourage-item.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Slight stagger feel from left to right */
+.js-gallery-item,
+.js-entourage-item {
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* Optional: smoother image feel */
+.js-gallery-item img,
+.js-entourage-item img {
+    transition: transform 0.9s cubic-bezier(.2,.8,.2,1);
+}
+
+.js-gallery-item.is-visible img,
+.js-entourage-item.is-visible img {
+    transform: scale(1);
+}
+
+/* initial subtle image scale for reveal polish */
+.js-gallery-item img,
+.js-entourage-item img {
+    transform: scale(1.02);
+}
+
+/* RSVP SECTION */
+.rsvp-section {
+    padding: 90px 40px;
+    background-color: #fef9ef;
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.rsvp-section .section-label {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 12px;
+  font-weight: 500;
+  color: #a47e1b;
+  margin-bottom: 14px;
+}
+
+.rsvp-title {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin: 0;
+  font-size: clamp(38px, 4.5vw, 62px);
+  color: #F9F6F0;
+  line-height: 1.08;
+}
+
+.rsvp-subtext {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    margin-bottom: 40px;
+    color: #F9F6F0;
+}
+
+/* Form */
+.rsvp-form {
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: left;
+    background: #f8f7f3;
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    border: 1px solid #e4e1d6;
+}
+
+.rsvp-form-row {
+    display: flex;
+    gap: 22px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.rsvp-form .field {
+    flex: 1;
+}
+
+.rsvp-form label {
+    display: block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 6px;
+    color: #6e6b64;
+}
+
+.rsvp-form input,
+.rsvp-form select,
+.rsvp-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #c8c3b5;
+    background: #ffffff;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.rsvp-form textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+/* Submit Button */
+.rsvp-submit {
+    width: 100%;
+    background-color: #c29a5b;
+    color: #fff;
+    border: none;
+    padding: 14px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.3s ease;
+}
+
+.rsvp-submit:hover {
+    background-color: #a8844c;
+}
+
+/* Success message */
+.rsvp-success {
+    background: #f0ede6;
+    padding: 12px;
+    border-radius: 6px;
+    color: #4b473f;
+    margin-bottom: 20px;
+}
+
+/* Desktop field width alignment fix */
+.rsvp-form-row .field {
+    min-width: 0; /* prevents flex overflow issues */
+}
+
+.rsvp-form-row.single .field {
+    flex: 100%;
+}
+
+/* Ensure consistent max-width for full-width inputs */
+.rsvp-form input,
+.rsvp-form select,
+.rsvp-form textarea {
+    box-sizing: border-box;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .rsvp-form {
+        padding: 24px;
+    }
+}
+
+/* Fix RSVP form overlapping corners on mobile */
+@media (max-width: 600px) {
+
+    .rsvp-form {
+        padding: 28px 20px;
+        border-radius: 14px;
+        background: #f8f7f3;
+        overflow: hidden; /* prevents form controls from spilling outside rounded corners */
+    }
+
+    .rsvp-form-row {
+        flex-direction: column;
+        gap: 18px;
+        margin-bottom: 18px;
+    }
+
+    .rsvp-form .field {
+        width: 100%;
+    }
+
+    .rsvp-form input,
+    .rsvp-form select,
+    .rsvp-form textarea {
+        font-size: 15px;
+        padding: 14px 16px;
+        border-radius: 10px;
+        box-sizing: border-box; /* prevents overflow */
+    }
+
+    .rsvp-form textarea {
+        min-height: 140px;
+    }
+
+    .rsvp-submit {
+        width: 100%;
+        padding: 16px 0;
+        font-size: 14px;
+        letter-spacing: 0.26em;
+        border-radius: 10px;
+        margin-top: 6px;
+    }
+}
+
+/* RSVP Toast Notification */
+.rsvp-toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background: #d4b16a;
+    color: #fff;
+    
+    padding: 10px 18px;               /* ↓ less padding */
+    border-radius: 12px;               
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;                   /* ↓ smaller */
+    letter-spacing: 0.10em;            /* ↓ tighter spacing */
+    text-transform: uppercase;
+
+    text-align: center !important;
+    display: inline-flex;              /* ↓ reduces excess space */
+    align-items: center;
+    justify-content: center;
+
+    line-height: 1.4;                  /* ↓ fixes big spacing between lines */
+
+    box-shadow: 0 6px 22px rgba(0,0,0,0.15);
+    opacity: 0;
+    visibility: hidden;
+
+    max-width: 92%;
+    width: auto;                       /* ↓ prevents over-wide box */
+    z-index: 9999;
+    transition: all 0.45s ease;
+}
+
+.rsvp-toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* RSVP LOADER SECTION (Loading icon during the sending of RSVP) */
+#rsvp-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh; /* <-- fixes mobile centering */
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .35s ease;
+}
+
+/* Center content (mobile-safe) */
+#rsvp-loader .loader-inner {
+    text-align: center;
+}
+
+/* Gold spinner */
+#rsvp-loader .loader-circle {
+    width: 60px;
+    height: 60px;
+    border: 3px solid rgba(217,183,119,0.35);
+    border-top-color: #D9B777;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: spin 1s linear infinite;
+}
+
+/* Elegant text */
+#rsvp-loader .loader-text {
+    color: #D9B777;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+}
+
+/* Spinner animation */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* MOBILE FIX: ensure loader stays perfectly centered */
+@media (max-width: 768px) {
+    #rsvp-loader {
+        height: 100dvh !important; /* dynamic viewport height */
+        padding-bottom: env(safe-area-inset-bottom); /* iPhone notch fix */
+    }
+}
+
+/* RSVP Messages */
+
+.rsvp-msg-content {
+    flex-grow: 1;
+}
+
+.rsvp-msg-name {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.rsvp-msg-time {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #888;
+}
+/* ======================
+   RSVP MESSAGE CONTAINER
+========================= */
+#rsvp-messages-wrapper {
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+#rsvp-message-box {
+    width: 100%;
+    max-width: 900px;
+    height: 320px;     /* ← FIXED HEIGHT — REQUIRED */
+    overflow: hidden;  /* ← REQUIRED — hides overflow for loop */
+    position: relative;
+}
+
+#rsvp-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    animation: msgScroll 12s linear infinite;
+}
+
+@keyframes msgScroll {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+}
+
+/* ======================
+   MESSAGE CARD
+========================= */
+.rsvp-msg-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 26px 30px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+}
+
+.rsvp-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #A8844C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.rsvp-msg-main { flex: 1; }
+
+.rsvp-msg-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.rsvp-msg-name {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #3e3a33;
+}
+
+.rsvp-msg-time {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    color: #8f8475;
+    white-space: nowrap;
+}
+
+.rsvp-msg-text {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    color: #4a443a;
+    line-height: 1.2;
+    text-align: left;
+}
+
+/* FINAL FIX – force correct sizing */
+#rsvp-messages-wrapper {
+    height: auto !important;
+    overflow: visible !important;
+}
+
+#rsvp-message-box {
+    height: 320px !important;
+    overflow: hidden !important;
+}
+
+#rsvp-messages {
+    animation: msgScroll 12s linear infinite !important;
+}
+
+/* Wrapper */
+#rsvp-messages-wrapper {
+    margin-top: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* LIST container (fixed height) */
+.rsvp-list {
+    width: 100%;
+    max-width: 900px;
+    height: 400px;        /* displays 3 messages */
+    overflow: hidden;
+    position: relative;
+}
+
+/* Track = the sliding container (NOT flex!) */
+.rsvp-track {
+    display: block;
+    will-change: transform;
+    transition: transform .6s ease;
+}
+
+/* Each message card */
+.rsvp-msg-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 26px 30px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    margin-bottom: 22px;
+    display: flex;
+    gap: 18px;
+}
+@media (max-width: 600px) {
+
+    /* Container height (shows 3 messages comfortably) */
+    .rsvp-list {
+        height: 420px;
+    }
+
+    /* Message card */
+    .rsvp-msg-card {
+        padding: 14px 16px;      /* unified */
+        border-radius: 14px;
+        margin-bottom: 16px;
+        gap: 12px;               /* unified (smaller gap) */
+    }
+
+    /* Avatar (choose more compact version) */
+    .rsvp-avatar {
+        width: 36px;             /* from compact version */
+        height: 36px;
+        font-size: 16px;
+    }
+
+    /* Top row (name + timestamp) */
+    .rsvp-msg-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;                /* compact version */
+    }
+
+    /* Name size */
+    .rsvp-msg-name {
+        font-size: 16px;         /* compact version */
+        line-height: 1.1;
+    }
+
+    /* Timestamp */
+    .rsvp-msg-time {
+        font-size: 11px;         /* compact */
+        text-align: left;
+        white-space: normal;
+    }
+
+    /* Main message text */
+    .rsvp-msg-text {
+        font-size: 14px;         /* compact */
+        line-height: 1.35;       /* tighter */
+        margin-top: 2px;
+    }
+}
+/* Center messages under the RSVP form — FINAL FIX */
+#rsvp-messages-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.rsvp-list {
+    max-width: 780px;   /* match RSVP form width */
+    width: 100%;
+    margin: 0 auto;     /* center */
+    padding: 0 4px;     /* prevents tiny overflow rounding on Safari */
+}
+
+/* Gold dividers above and below the scrolling message list */
+#rsvp-messages-wrapper {
+    position: relative;
+    padding: 40px 0; /* space for dividers */
+}
+
+#rsvp-messages-wrapper::before,
+#rsvp-messages-wrapper::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 200px;                 /* divider length */
+    height: 2px;
+    background: #C29A5B;          /* gold color */
+    transform: translateX(-50%);
+    opacity: 0.5;                 /* soft elegant gold */
+}
+
+/* Top divider */
+#rsvp-messages-wrapper::before {
+    top: 0;
+}
+
+/* Bottom divider */
+#rsvp-messages-wrapper::after {
+    bottom: 0;
+}
+
+/* Background wrapper */
+.rsvp-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+/* The full-section image */
+.rsvp-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 1;
+}
+
+/* Content wrapper that adds padding (NOT the section itself) */
+.rsvp-inner {
+    position: relative;
+    z-index: 2;
+    padding: 60px 40px 60px; /* spacing controls section height */
+}
+
+
+/* Section itself only establishes position */
+.rsvp-section {
+    position: relative;
+    background: #fef9ef; /* fallback */
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .rsvp-inner {
+        padding: 30px 20px 30px;
+    }
+
+    .rsvp-bg img {
+        object-fit: cover; 
+        object-position: top;
+    }
+}
+
+/* ===========================
+   VIEW ALL MESSAGES BUTTON
+=========================== */
+.view-all-container {
+    text-align: center;
+    margin-top: 35px;
+}
+
+.view-all-btn:hover {
+    background: #a8844c;
+}
+
+/* Allow clicking THROUGH the background image layer */
+.rsvp-bg,
+.rsvp-bg img {
+    pointer-events: none !important;
+}
+
+/* VIEW ALL button stays above background */
+.view-all-container {
+    text-align: center;
+    margin-top: 35px;
+    position: relative;
+    z-index: 3;
+}
+.view-all-btn {
+    position: relative;
+    z-index: 4;
+    background: #a47e1b;
+    color: #fff;
+    border: none;
+    padding: 14px 34px;
+    font-size: 15px;
+    letter-spacing: 0.14em;
+    border-radius: 8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .3s ease;
+}
+.view-all-btn:hover {
+    background: #a8844c;
+}
+/* ===== FULLSCREEN OVERLAY (centered, no background scroll) ===== */
+.all-msg-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex !important;
+    justify-content: center;     /* center horizontally */
+    align-items: flex-start;     /* start from top so it never goes off screen */
+    padding-top: 40px;           /* push panel a bit down */
+    padding-inline: 12px;
+    z-index: 999999;
+}
+
+/* Hidden state */
+.all-msg-modal[hidden] {
+    display: none !important;
+}
+
+/* ===== MODAL PANEL ===== */
+.all-msg-panel {
+    background: #ffffff;
+    width: 94%;
+    max-width: 720px;
+    max-height: 90vh;
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;            /* no white edges */
+
+    border-radius: 28px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+/* ===== GOLD STICKY HEADER ===== */
+.all-msg-header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+
+    background: #C29A5B;
+    color: #fff;
+    padding: 16px 56px 16px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 28px 28px 0 0;   /* rounded top corners only */
+}
+
+/* Centered title */
+.all-msg-title {
+    margin: 0;
+    flex: 1;
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Close button on the right */
+.all-msg-close {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.all-msg-close:hover {
+    opacity: 1;
+}
+
+/* ===== SCROLLABLE CONTENT ===== */
+.all-msg-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Scrollbar styling (optional) */
+.all-msg-list::-webkit-scrollbar {
+    width: 8px;
+}
+.all-msg-list::-webkit-scrollbar-thumb {
+    background: #d3c6af;
+    border-radius: 8px;
+}
+
+/* ===== FREEZE BACKGROUND WHEN MODAL IS OPEN ===== */
+body.no-scroll,
+html.no-scroll {
+    overflow: hidden !important;
+    height: 100%;
+}
+
+/* ===== MOBILE TWEAKS ===== */
+@media (max-width: 600px) {
+    .all-msg-panel {
+        width: 96%;
+        max-height: 90vh;
+        border-radius: 24px;
+    }
+
+    .all-msg-header {
+        border-radius: 24px 24px 0 0;
+        padding: 14px 48px 14px 18px;
+    }
+
+    .all-msg-title {
+        font-size: 18px;
+    }
+
+    .all-msg-close {
+        right: 16px;
+        font-size: 26px;
+    }
+}
+
+/* EVENT INFO SECTION */
+
+.event-info-section {
+    padding: 80px 40px;
+	background-color: #a47e1b;
+}
+
+.event-info-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.7fr);
+    gap: 60px;
+    align-items: flex-start;
+}
+
+.event-info-section .section-label {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 12px;
+  font-weight: 500;
+  color: #ffff3f;
+  margin-bottom: 14px;
+}
+
+.event-info-section h2 {
+    font-size: 32px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+	color: #F9F6F0;
+}
+
+.event-info-section p.lead {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    margin-bottom: 30px;
+	color: #F9F6F0;
+}
+
+.event-accordion {
+    border-top: 1px solid #cfcfcf;
+}
+
+.event-accordion-item {
+    border-bottom: 1px solid #cfcfcf;
+}
+
+.event-accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    cursor: pointer;
+    font-size: 18px;
+	font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+	color: #F9F6F0 ;
+}
+
+.event-accordion-header span.plus {
+    font-size: 24px;
+    transition: transform 0.2s ease;
+}
+
+.event-accordion-header.active span.plus {
+    transform: rotate(45deg);
+}
+
+.event-info-content-panel {
+    position: relative;
+    min-height: 260px;
+    height: auto;              /* allow natural height */
+    overflow: visible;         /* prevent content being cut */
+}
+/* Accordion Highlight Active State */
+.event-accordion-header {
+    padding: 14px 18px;
+    transition: background-color .35s ease, color .35s ease;
+    position: relative;
+}
+
+/* Smooth gold highlight when active */
+.event-accordion-header.active {
+    background-color: rgba(194, 154, 91, 0.16); /* soft gold glow */
+    color: #F9F6F0; /* slightly richer text color */
+}
+
+/* Keep text span color consistent even when highlighted */
+.event-accordion-header.active span {
+    color: #8b6a37;
+}
+
+/* Animate the + turning to x */
+.event-accordion-header .plus {
+    transition: transform .25s ease, color .25s ease;
+}
+
+/* Make + sign gold when active */
+.event-accordion-header.active .plus {
+    color: #a47e1b;
+}
+
+.event-accordion-header.active {
+    background-color: #ffff3f;
+    box-shadow: inset 0 0 0 1px rgba(194, 154, 91, 0.35);
+}
+
+.event-accordion-header:hover {
+    background-color: #ffff3f;
+}
+
+/* Panels */
+.event-panel {
+    display: none;
+    position: relative; /* allows natural height */
+    width: 100%;
+}
+.event-panel.active {
+    display: block;
+}
+
+/* ======================================
+   DRESS CODE SECTION
+====================================== */
+
+#panel-dresscode {
+    position: relative;
+    max-height: 520px;
+    overflow-y: auto;
+    padding: 20px 10px 20px 0;
+}
+
+/* Gold scrollbar */
+#panel-dresscode::-webkit-scrollbar {
+    width: 8px;
+}
+
+#panel-dresscode::-webkit-scrollbar-track {
+    background: rgba(194, 154, 91, 0.15);
+    border-radius: 10px;
+}
+
+#panel-dresscode::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #d9b77a, #c29a5b);
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(194,154,91,0.7);
+}
+
+#panel-dresscode::-webkit-scrollbar-thumb:hover {
+    background: #a8844c;
+}
+
+/* Main vertical stack */
+.dresscode-scroll {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+/* Each major section */
+.dresscode-section-block {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* Palette / section heading */
+.wedding-palette-wrapper {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.wedding-palette-label {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 25px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #F9F6F0 ;
+    margin-bottom: 14px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.dresscode-main-caption {
+    max-width: 760px;
+    margin: 0 auto 18px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    line-height: 1.9;
+    color: #F9F6F0;
+    text-align: center;
+}
+
+/* Palette row */
+.wedding-palette {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* Color dots */
+.palette-color {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* Colors */
+.palette-color.c1 { background: #D14C51; }
+.palette-color.c2 { background: #F7838C; }
+.palette-color.c3 { background: #F7CDCF; }
+.palette-color.c4 { background: #A17C50; }
+.palette-color.c5 { background: #785A4F; }
+.palette-color.c6 { background: #4B2A19; }
+
+.palette-color.d1 { background: #C8AAE6; }
+.palette-color.d2 { background: #81AABE; }
+.palette-color.d3 { background: #ABD5EB; }
+.palette-color.d4 { background: #CA5F31; }
+.palette-color.d5 { background: #EA8B53; }
+.palette-color.d6 { background: #7B4F34; }
+.palette-color.d7 { background: #95765A; }
+
+/* Animation active state */
+.wedding-palette-wrapper.is-visible .wedding-palette-label {
+    opacity: 1;
+    transform: translateY(0);
+    transition: 0.6s ease;
+}
+
+.wedding-palette-wrapper.is-visible .palette-color {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: 0.6s ease;
+}
+
+/* Stagger */
+.wedding-palette-wrapper.is-visible .palette-color:nth-child(1) { transition-delay: 0.1s; }
+.wedding-palette-wrapper.is-visible .palette-color:nth-child(2) { transition-delay: 0.2s; }
+.wedding-palette-wrapper.is-visible .palette-color:nth-child(3) { transition-delay: 0.3s; }
+.wedding-palette-wrapper.is-visible .palette-color:nth-child(4) { transition-delay: 0.4s; }
+.wedding-palette-wrapper.is-visible .palette-color:nth-child(5) { transition-delay: 0.5s; }
+.wedding-palette-wrapper.is-visible .palette-color:nth-child(6) { transition-delay: 0.6s; }
+.wedding-palette-wrapper.is-visible .palette-color:nth-child(7) { transition-delay: 0.7s; }
+
+/* Dress code image row */
+.dresscode-row {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+}
+
+.dresscode-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.palette-group {
+    margin-bottom: 14px;
+}
+
+.palette-group-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 22px;
+    font-style: italic;
+    color: #F9F6F0;
+    letter-spacing: 0.03em;
+}
+
+/* Photos */
+.dresscode-photo {
+    display: flex;
+    justify-content: center;
+}
+
+.dresscode-img {
+    max-width: 240px;
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    #panel-dresscode {
+        max-height: 580px;
+        padding-right: 0;
+    }
+
+    .wedding-palette-label {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .dresscode-main-caption {
+        font-size: 12px;
+        line-height: 1.8;
+        padding: 0 10px;
+    }
+
+    .palette-color {
+        width: 22px;
+        height: 22px;
+    }
+
+    .dresscode-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 36px;
+    }
+
+    .dresscode-img {
+        max-width: 220px;
+    }
+
+    .palette-group-title {
+        font-size: 20px;
+    }
+}
+/* EVENT INFO MAP EMBEDS */
+.event-info-block {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #4b4b4b;
+}
+
+.event-info-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 20px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 14px 0 4px;
+    color: #3b3126;
+}
+
+.event-info-time {
+    font-size: 14px;
+    margin-bottom: 12px;
+    font-weight: 500;
+    color: #7a6956;
+}
+
+/* ✅ CEREMONY & RECEPTION WRAPPER */
+.event-schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ✅ EACH TIME ROW */
+.event-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ✅ LABEL (Ceremony / Reception) */
+.event-label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #ffff3f;
+    min-width: 110px;
+}
+
+/* ✅ DOT SEPARATOR */
+.event-separator {
+    color: #c6a35b;
+    font-size: 14px;
+}
+
+/* ✅ TIME */
+.event-hour {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    color: #F9F6F0 ;
+    font-weight: 500;
+}
+
+/* MAP WRAPPER */
+.event-map-wrapper {
+    position: relative;
+    margin: 12px 0 32px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #e6e6e6;  /* fallback while map loads */
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.06);
+}
+
+.event-map-wrapper iframe {
+    width: 100%;
+    height: 360px;
+    border: 0;
+    filter: grayscale(100%) brightness(92%);
+    transition: filter .3s ease;
+}
+
+/* Optional hover to show full color when interacting */
+.event-map-wrapper:hover iframe {
+    filter: grayscale(0%) brightness(100%);
+}
+
+.mt-40 {
+    margin-top: 36px;
+}
+
+/* Accordion improvements, optional but recommended */
+.event-accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 28px 14px 28px; /* increase left & right padding */
+    cursor: pointer;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: background-color .35s ease, color .35s ease;
+}
+
+.event-panel {
+    display: none;
+}
+
+.event-panel.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+	max-height: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.event-info-block {
+    margin-bottom: 22px;
+}
+
+.event-location-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 25px;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    color: #F9F6F0 ;
+	
+}
+
+.event-time {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    margin-bottom: 8px;
+    opacity: 0.8;
+	font-weight:500;
+	color: #F9F6F0;
+}
+
+.event-map-link {
+    display: inline-block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+    color: #F9F6F0; /* your warm gold-brown accent */
+    padding-bottom: 2px;
+    border-bottom: 1px solid #F9F6F0;
+    transition: color .25s ease, border-color .25s ease;
+}
+
+.event-map-link:hover {
+    color: #ffff3f;
+    border-color: #ffff3f;
+}
+/* ✨ Elegant Ceremony & Reception Time Layout */
+.elegant-time {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.time-row {
+    display: flex;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #7a6956;
+}
+
+.time-label {
+    min-width: 90px;
+    font-weight: 500;
+}
+
+.time-separator {
+    flex: 1;
+    height: 1px;
+    background: rgba(122, 105, 86, 0.35);
+    margin: 0 10px;
+}
+
+.time-value {
+    font-weight: 600;
+    color: #3b3126;
+}
+
+/* Maps inside accordion scroll panel */
+#panel-ceremony .event-map-wrapper iframe {
+    height: 210px; /* reduced to prevent overflow */
+}
+
+/* Scrollbar styling (optional, looks cleaner) */
+#panel-ceremony::-webkit-scrollbar {
+    width: 6px;
+}
+#panel-ceremony::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.25);
+    border-radius: 4px;
+}
+
+.event-venue-photo {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+#panel-ceremony .event-map-wrapper iframe {
+    height: 250px;
+}
+
+.event-map-wrapper {
+    position: relative;
+}
+
+.event-map-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.18);
+    transition: background 0.35s ease;
+    pointer-events: none;
+}
+
+.event-map-wrapper:hover::after {
+    background: rgba(0,0,0,0.05);
+}
+
+/* Gift Note */
+
+#panel-gifts .gift-note-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+    padding: 42px 20px;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+#panel-gifts .gift-note-text {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 22px;
+    line-height: 1.85;
+    font-style: italic;
+    color: #8A6A3F;
+    letter-spacing: 0.02em;
+    font-weight: 400;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#panel-gifts .gift-highlight {
+    color: #A47C4F;
+    font-style: normal;
+    font-weight: 500;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 3px; /* space for underline */
+}
+
+#panel-gifts .gift-highlight::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;            /* consistent thickness */
+    background-color: #C29A5B;
+    border-radius: 2px;     /* smooth edge */
+}
+
+#panel-gifts .gift-floral img {
+    max-width: 380px;
+    width: 150%;
+    height: auto;
+    display: block;
+    opacity: 0.95;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    #panel-gifts .gift-note-wrapper {
+        gap: 18px;
+        padding: 28px 16px;
+        max-width: 100%;
+    }
+
+    #panel-gifts .gift-note-text {
+        font-size: 18px;
+        line-height: 1.75;
+        max-width: 92%;
+    }
+
+    #panel-gifts .gift-floral img {
+        max-width: 170px;
+    }
+}
+
+/* ======================================
+   GIFT NOTE EDITORIAL CARD
+====================================== */
+
+#panel-gifts .gift-card {
+    position: relative;
+    padding: 42px 40px;
+    max-width: 640px;
+    margin: 0 auto;
+    background: #a47e1b;   /* soft paper tone */
+    border-radius: 6px;
+}
+
+/* Gold frame (editorial invitation style) */
+#panel-gifts .gift-card::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid #F9F6F0;
+    pointer-events: none;
+}
+
+/* Typography */
+#panel-gifts .gift-note-text {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 22px;
+    line-height: 1.9;
+    font-style: italic;
+    color: #F9F6F0;
+    letter-spacing: 0.02em;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Highlight registry names */
+#panel-gifts .gift-highlight {
+    color: #A47C4F;
+    font-style: normal;
+    font-weight: 500;
+}
+
+/* Floral images */
+#panel-gifts .gift-floral img {
+    max-width: 350px;
+    opacity: 0.95;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    #panel-gifts .gift-card {
+        padding: 32px 24px;
+    }
+
+    #panel-gifts .gift-note-text {
+        font-size: 18px;
+        line-height: 1.75;
+    }
+
+    #panel-gifts .gift-floral img {
+        max-width: 280px;
+    }
+}
+
+/* MOBILE FIX — EVENT INFORMATION */
+@media (max-width: 768px) {
+
+    /* Make the grid stack vertically */
+    .event-info-grid {
+        grid-template-columns: 1fr !important;
+        gap: 30px;
+    }
+
+    /* Reduce padding for mobile */
+    .event-info-section {
+        padding: 40px 20px;
+    }
+
+    /* Make headings readable */
+    .event-info-section h2 {
+        font-size: 26px;
+        text-align: center;
+        line-height: 1.3;
+    }
+
+    .event-info-section .section-label {
+        text-align: center;
+    }
+
+    .event-info-section p.lead {
+        text-align: center;
+        max-width: 420px;
+        margin: 0 auto 24px;
+    }
+
+    /* Accordion full width */
+    .event-accordion {
+        width: 100%;
+    }
+
+    .event-accordion-header {
+        padding: 14px 16px;
+        font-size: 13px;
+    }
+
+    /* Fix map overflowing */
+    .event-map-wrapper iframe {
+        height: 260px !important;
+    }
+
+    /* Gift note images scale better on mobile */
+    #panel-gifts .gift-note-img {
+        max-width: 180px;
+        margin: 0 auto;
+    }
+
+    /* Center content panel */
+    .event-info-content-panel {
+        width: 100%;
+    }
+}
+/* FORCE left alignment for accordion titles */
+.event-accordion-header span:not(.plus) {
+    flex: 1;
+    text-align: left;
+}
+
+/* FOOTER SECTION */
+.site-footer {
+    background:
+        linear-gradient(to bottom, #121212 0%, #0b0b0b 100%);
+    padding: 72px 20px 44px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-inner {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+/* top divider */
+.footer-topline {
+    width: 140px;
+    height: 1px;
+    margin: 0 auto 28px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(200,162,77,0.85),
+        transparent
+    );
+}
+
+/* brand block */
+.footer-brand-block {
+    margin-bottom: 34px;
+}
+
+.footer-kicker {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: rgba(249,246,240,0.58);
+    margin-bottom: 14px;
+}
+
+.footer-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(34px, 4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #F9F6F0;
+    margin-bottom: 8px;
+}
+
+.footer-subtitle {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: #C8A24D;
+}
+
+/* nav */
+.footer-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+    margin-bottom: 32px;
+}
+
+.footer-menu a {
+    position: relative;
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(249,246,240,0.82);
+    text-decoration: none;
+    transition: color 0.25s ease, opacity 0.25s ease;
+}
+
+.footer-menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 1px;
+    background: #C8A24D;
+    transition: width 0.28s ease;
+}
+
+.footer-menu a:hover {
+    color: #ffffff;
+}
+
+.footer-menu a:hover::after {
+    width: 100%;
+}
+
+/* bottom */
+.footer-bottom {
+    padding-top: 22px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-copy {
+    display: inline-block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    color: rgba(249,246,240,0.52);
+    line-height: 1.8;
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 56px 18px 34px;
+    }
+
+    .footer-topline {
+        width: 100px;
+        margin-bottom: 22px;
+    }
+
+    .footer-brand-block {
+        margin-bottom: 28px;
+    }
+
+    .footer-kicker {
+        font-size: 10px;
+        letter-spacing: 0.24em;
+        margin-bottom: 10px;
+    }
+
+    .footer-title {
+        font-size: 34px;
+        letter-spacing: 0.06em;
+        margin-bottom: 6px;
+    }
+
+    .footer-subtitle {
+        font-size: 11px;
+        letter-spacing: 0.28em;
+    }
+
+    .footer-menu {
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 26px;
+    }
+
+    .footer-menu a {
+        font-size: 11px;
+        letter-spacing: 0.16em;
+    }
+
+    .footer-bottom {
+        padding-top: 18px;
+    }
+
+    .footer-copy {
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        line-height: 1.7;
+    }
+}
+
+/* =====================================
+   FOOTER SCROLL REVEAL
+===================================== */
+.js-footer-item {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(3px);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s cubic-bezier(.2,.8,.2,1),
+    filter 0.9s ease;
+  transition-delay: var(--footer-delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+
+.js-footer-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* MUSIC SECTION */
+.music-toggle {
+    position: fixed;
+    left: 20px;            /* Adjust this to move horizontally */
+    bottom: 30px;          /* Adjust this to move vertically */
+    background: #d4b16a;
+    color: white;
+    font-size: 22px;
+    padding: 14px 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    transition: 0.3s ease;
+    font-family: "Cormorant Garamond", serif;
+    opacity: 0.85;
+}
+
+.music-toggle:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Change icon appearance when music is playing */
+.music-toggle.playing {
+    background: #b99354;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .music-toggle {
+        left: 14px;
+        bottom: 20px;
+        font-size: 20px;
+        padding: 12px 14px;
+    }
+}
+
+/* Elegant Music Toggle */
+.music-toggle {
+    position: fixed;
+    left: 22px;
+    bottom: 32px;
+    width: 52px;
+    height: 52px;
+    background: #f4e8d7;
+    border: 2px solid #d4b16a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 9999;
+    transition: 0.3s ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+
+/* Gold SVG icon */
+.music-icon {
+    width: 28px;
+    height: 28px;
+}
+
+/* Pulse animation when music is playing */
+.music-toggle.playing {
+    animation: pulse 2.4s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 rgba(212,177,106,0.4); }
+    50% { transform: scale(1.06); box-shadow: 0 0 16px rgba(212,177,106,0.6); }
+    100% { transform: scale(1); box-shadow: 0 0 0 rgba(212,177,106,0.4); }
+}
+
+/* Tooltip */
+.music-toggle::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #d4b16a;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    font-family: "Montserrat", sans-serif;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.25s ease;
+    white-space: nowrap;
+}
+
+.music-toggle:hover::after {
+    opacity: 1;
+}
+
+/* Mobile tweaks */
+@media (max-width: 768px) {
+    .music-toggle {
+        bottom: 20px;
+        left: 14px;
+        width: 48px;
+        height: 48px;
+    }
+}
+
+.music-toggle.hide {
+    display: none !important;
+}
+
+/* SCROLL ANIMATIONS SECTION */
+
+.js-animate {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.js-animate.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
